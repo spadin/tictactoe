@@ -21,6 +21,10 @@ func (t *testMarkSuite) TestXMarkIsOne() {
 	t.Equal(X, Mark(1), "X should equal to 1")
 }
 
+func (t *testMarkSuite) TestEMarkIsZero() {
+	t.Equal(E, Mark(0), "E should equal 0")
+}
+
 func (t *testMarkSuite) TestOMarkIsTwo() {
 	t.Equal(O, Mark(2), "O should equal 2")
 }
@@ -34,5 +38,5 @@ func (t *testMarkSuite) TestStringifyO() {
 }
 
 func (t *testMarkSuite) TestStringifyEmptyMark() {
-	t.Equal(" ", stringify(Mark(0)), "empty mark should be empty space")
+	t.Equal(" ", stringify(E), "empty mark should be empty space")
 }

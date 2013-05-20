@@ -2,6 +2,7 @@ package tictactoe
 
 type Mark int
 
+const E Mark = Mark(0)
 const X Mark = Mark(1)
 const O Mark = Mark(2)
 
@@ -11,7 +12,7 @@ func stringify(mark Mark) (str string) {
 		str = "X"
 	case O:
 		str = "O"
-	case 0:
+	case E:
 		str = " "
 	}
 	return
