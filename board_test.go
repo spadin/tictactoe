@@ -21,6 +21,20 @@ func boardSuiteSetup() *Board {
 	return new(Board)
 }
 
+func isEven(i int) bool {
+	return (i%2 == 0)
+}
+
+func makeMoves(board *Board, moves ...int) {
+	for i := 0; i < len(moves); i++ {
+		mark := O
+		if isEven(i) {
+			mark = X
+		}
+		board.SetMark(mark, moves[i])
+	}
+}
+
 func (t *testBoardSuite) TestEmptyBoardIndexForNewBoard() {
 	board := boardSuiteSetup()
 	t.True(board.IsEmpty(0), "new board should have empty position")
@@ -36,4 +50,15 @@ func (t *testBoardSuite) TestMarkingTheBoard() {
 	board := boardSuiteSetup()
 	board.SetMark(X, 0)
 	t.False(board.IsEmpty(0), "marks board a index 0")
+}
+
+func (t *testBoardSuite) TestBoardIsFull() {
+	board := boardSuiteSetup()
+	makeMoves(board, 0, 1, 2, 3, 4, 5, 6, 7, 8)
+	t.True(board.IsFull(), "determines the board is full")
+}
+
+func (t *testBoardSuite) TestBoardIsNotFull() {
+	board := boardSuiteSetup()
+	t.False(board.IsFull(), "determines board is not full")
 }
