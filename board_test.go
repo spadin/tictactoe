@@ -17,23 +17,23 @@ func TestBoardRunner(t *testing.T) {
 	)
 }
 
-func setup() *Board {
+func boardSuiteSetup() *Board {
 	return new(Board)
 }
 
 func (t *testBoardSuite) TestEmptyBoardIndexForNewBoard() {
-	board := setup()
+	board := boardSuiteSetup()
 	t.True(board.IsEmpty(0), "new board should have empty position")
 }
 
 func (t *testBoardSuite) TestNonEmptyBoardIndex() {
-	board := setup()
+	board := boardSuiteSetup()
 	board[0] = X
 	t.False(board.IsEmpty(0), "marked position not empty")
 }
 
 func (t *testBoardSuite) TestMarkingTheBoard() {
-	board := setup()
+	board := boardSuiteSetup()
 	board.SetMark(X, 0)
 	t.False(board.IsEmpty(0), "marks board a index 0")
 }
