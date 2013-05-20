@@ -6,9 +6,9 @@ func isEven(i int) bool {
 
 func makeMoves(board *Board, moves ...int) {
 	for i := 0; i < len(moves); i++ {
-		mark := O
+		mark := X
 		if isEven(i) {
-			mark = X
+			mark = O
 		}
 		board.SetMark(mark, moves[i])
 	}
