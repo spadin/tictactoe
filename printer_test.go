@@ -1,9 +1,7 @@
 package tictactoe
 
 import (
-	"bytes"
 	"github.com/remogatto/prettytest"
-	"io"
 	"os"
 	"testing"
 )
@@ -23,24 +21,6 @@ func TestPrinterRunner(t *testing.T) {
 		new(prettytest.TDDFormatter),
 		new(testPrinterSuite),
 	)
-}
-
-type captureOutputInnerFunc func()
-
-func captureOutput(operation captureOutputInnerFunc) string {
-	reader, writer, _ := os.Pipe()
-	stdout := os.Stdout
-	os.Stdout = writer
-
-	operation()
-
-	os.Stdout = stdout
-	writer.Close()
-	buf := new(bytes.Buffer)
-	io.Copy(buf, reader)
-	reader.Close()
-
-	return buf.String()
 }
 
 func (t *testPrinterSuite) TestPrint() {
