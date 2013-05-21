@@ -32,10 +32,18 @@ func (g *Getter) GetString() (input string) {
 }
 
 func (g *Getter) GetInt() (input int) {
+	input = g.GetIntWithCallback(func() {})
+	return
+}
+
+type errCallback func()
+
+func (g *Getter) GetIntWithCallback(cb errCallback) (input int) {
 	str := g.GetString()
 	i64, err := strconv.ParseInt(str, 10, 0)
 	if err != nil {
-		input = g.GetInt()
+		cb()
+		input = g.GetIntWithCallback(cb)
 	} else {
 		input = int(i64)
 	}

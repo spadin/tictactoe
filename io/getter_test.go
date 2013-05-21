@@ -74,3 +74,15 @@ func (t *testGetterSuite) TestRepeatedlyAskForInt() {
 	})
 	t.Equal(8, input)
 }
+
+func (t *testGetterSuite) TestGetIntWithCallback() {
+	var count int
+	iohelpers.SimulateMultipleInput([]string{"A", "C", "8"}, func() {
+		getter := getterSuiteSetup()
+		getter.GetIntWithCallback(func() {
+			count += 1
+		})
+	})
+
+	t.Equal(2, count)
+}
