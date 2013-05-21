@@ -11,7 +11,7 @@ type testGetterSuite struct {
 }
 
 func getterSuiteSetup() (getter *Getter) {
-	getter = &Getter{in: os.Stdin}
+	getter = NewStdinGetter()
 	return
 }
 
@@ -23,11 +23,11 @@ func TestGetterRunner(t *testing.T) {
 	)
 }
 
-func (t *testGetterSuite) TestFscan() {
+func (t *testGetterSuite) TestFscanln() {
 	var input string
 	simulateInput("sample-input", func() {
 		getter := getterSuiteSetup()
-		input = getter.Fscan()
+		input = getter.Fscanln()
 	})
 
 	t.Equal("sample-input", input)
@@ -43,4 +43,33 @@ func (t *testGetterSuite) TestNewGetter() {
 func (t *testGetterSuite) TestNewStdinGetter() {
 	getter := NewStdinGetter()
 	t.Equal(os.Stdin, getter.in)
+}
+
+func (t *testGetterSuite) TestGetString() {
+	var input string
+	simulateInput("sample-string", func() {
+		getter := getterSuiteSetup()
+		input = getter.GetString()
+	})
+
+	t.Equal("sample-string", input)
+}
+
+func (t *testGetterSuite) TestGetInt() {
+	var input int
+	simulateInput("1", func() {
+		getter := getterSuiteSetup()
+		input = getter.GetInt()
+	})
+
+	t.Equal(1, input)
+}
+
+func (t *testGetterSuite) TestRepeatedlyAskForInt() {
+	var input int
+	simulateMultipleInput([]string{"A", "C", "8"}, func() {
+		getter := getterSuiteSetup()
+		input = getter.GetInt()
+	})
+	t.Equal(8, input)
 }

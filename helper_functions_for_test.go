@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 )
 
 func isEven(i int) bool {
@@ -51,8 +52,12 @@ func captureOutput(operation noInputNoReturnFunc) string {
 }
 
 func simulateInput(stubbedInput string, operation noInputNoReturnFunc) {
+	simulateMultipleInput([]string{stubbedInput}, operation)
+}
+
+func simulateMultipleInput(inputSequence []string, operation noInputNoReturnFunc) {
 	reader, writer, _ := os.Pipe()
-	byt := bytes.TrimSpace([]byte(stubbedInput))
+	byt := bytes.TrimSpace([]byte(strings.Join(inputSequence, "\n")))
 	buf := bytes.NewBuffer(byt)
 
 	_, err := io.Copy(writer, buf)
@@ -63,8 +68,9 @@ func simulateInput(stubbedInput string, operation noInputNoReturnFunc) {
 
 	stdin := os.Stdin
 	os.Stdin = reader
-	operation()
-	os.Stdin = stdin
 
+	operation()
+
+	os.Stdin = stdin
 	reader.Close()
 }
