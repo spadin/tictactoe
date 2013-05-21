@@ -49,3 +49,22 @@ func captureOutput(operation noInputNoReturnFunc) string {
 
 	return buf.String()
 }
+
+func simulateInput(stubbedInput string, operation noInputNoReturnFunc) {
+	reader, writer, _ := os.Pipe()
+	byt := bytes.TrimSpace([]byte(stubbedInput))
+	buf := bytes.NewBuffer(byt)
+
+	_, err := io.Copy(writer, buf)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error occurred during io.Copy: %v", err)
+	}
+	writer.Close()
+
+	stdin := os.Stdin
+	os.Stdin = reader
+	operation()
+	os.Stdin = stdin
+
+	reader.Close()
+}
