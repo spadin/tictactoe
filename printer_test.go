@@ -50,13 +50,13 @@ func (t *testPrinterSuite) TestPrintf() {
 	t.Equal("The sky is blue", out)
 }
 
-func (t *testPrinterSuite) TestNewStdoutPrinter() {
-	printer := NewStdoutPrinter()
-	t.Equal(os.Stdout, printer.out, "Print output set to stdout")
-}
-
 func (t *testPrinterSuite) TestNewPrinter() {
 	_, writer, _ := os.Pipe()
 	printer := NewPrinter(writer)
 	t.Equal(writer, printer.out, "Print output set to custom writer")
+}
+
+func (t *testPrinterSuite) TestNewStdoutPrinter() {
+	printer := NewStdoutPrinter()
+	t.Equal(os.Stdout, printer.out, "Print output set to stdout")
 }
