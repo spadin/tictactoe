@@ -23,16 +23,6 @@ func TestStdinGetterRunner(t *testing.T) {
 	)
 }
 
-func (t *testStdinGetterSuite) TestFscanln() {
-	var input string
-	simulateInput("sample-input", func() {
-		getter := getterSuiteSetup()
-		input = getter.Fscanln()
-	})
-
-	t.Equal("sample-input", input)
-}
-
 func (t *testStdinGetterSuite) TestNewStdinGetter() {
 	getter := NewStdinGetter()
 	t.Equal(os.Stdin, getter.in)

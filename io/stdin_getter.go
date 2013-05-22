@@ -16,13 +16,8 @@ func NewStdinGetter() (getter *StdinGetter) {
 	return
 }
 
-func (g *StdinGetter) Fscanln() (input string) {
-	fmt.Fscanln(g.in, &input)
-	return
-}
-
 func (g *StdinGetter) GetString() (input string) {
-	input = g.Fscanln()
+	fmt.Fscanln(g.in, &input)
 	return
 }
 
@@ -30,8 +25,6 @@ func (g *StdinGetter) GetInt() (input int) {
 	input = g.GetIntWithCallback(func() {})
 	return
 }
-
-type errCallback func()
 
 func (g *StdinGetter) GetIntWithCallback(cb errCallback) (input int) {
 	str := g.GetString()
