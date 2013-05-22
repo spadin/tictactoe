@@ -1,17 +1,17 @@
 package game
 
-type Board [9]Mark
+type TictactoeBoard [9]Mark
 
-func NewBoard() (board *Board) {
-	board = new(Board)
+func NewTictactoeBoard() (board *TictactoeBoard) {
+	board = new(TictactoeBoard)
 	return
 }
 
-func (board Board) IsEmpty(index int) bool {
+func (board TictactoeBoard) IsEmpty(index int) bool {
 	return board[index] == 0
 }
 
-func (board Board) IsFull() bool {
+func (board TictactoeBoard) IsFull() bool {
 	for index := 0; index < len(board); index++ {
 		if board[index] == Mark(0) {
 			return false
@@ -20,6 +20,6 @@ func (board Board) IsFull() bool {
 	return true
 }
 
-func (board *Board) SetMark(mark Mark, index int) {
+func (board *TictactoeBoard) SetMark(mark Mark, index int) {
 	board[index] = mark
 }
