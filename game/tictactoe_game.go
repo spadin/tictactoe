@@ -4,8 +4,8 @@ type TictactoeGame struct {
 	board Board
 }
 
-func NewTictactoeGame() (game *TictactoeGame) {
-	game = new(TictactoeGame)
+func NewTictactoeGame(board Board) (game *TictactoeGame) {
+	game = &TictactoeGame{board: board}
 	return
 }
 
