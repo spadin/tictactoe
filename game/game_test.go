@@ -1,4 +1,4 @@
-package tictactoe
+package game
 
 import (
 	"github.com/remogatto/prettytest"
@@ -9,8 +9,8 @@ type testGameSuite struct {
 	prettytest.Suite
 }
 
-func gameSuiteSetup() (board *Board, game *Game) {
-	board = new(Board)
+func gameSuiteSetup() (board Board, game *Game) {
+	board = NewTictactoeBoard()
 	game = new(Game)
 	game.board = board
 	return
@@ -31,7 +31,7 @@ func (t *testGameSuite) TestNewGameHasNoWinner() {
 
 func (t *testGameSuite) TestXWinningGameHasWinner() {
 	board, game := gameSuiteSetup()
-	playXWinningGame(board)
+	playXWinningGame(board.(*TictactoeBoard))
 	t.True(game.HasWinner(), "X winning game should have winner")
 }
 
@@ -42,12 +42,12 @@ func (t *testGameSuite) TestGameoverFalseWithNewGame() {
 
 func (t *testGameSuite) TestGameoverTrueWithWinningGame() {
 	board, game := gameSuiteSetup()
-	playXWinningGame(board)
+	playXWinningGame(board.(*TictactoeBoard))
 	t.True(game.IsGameover(), "Game is over when there is a winner")
 }
 
 func (t *testGameSuite) TestGameoverTrueWithFullBoard() {
 	board, game := gameSuiteSetup()
-	playTiedGame(board)
+	playTiedGame(board.(*TictactoeBoard))
 	t.True(game.IsGameover(), "Game is over when board full")
 }

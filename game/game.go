@@ -1,7 +1,7 @@
-package tictactoe
+package game
 
 type Game struct {
-	board *Board
+	board Board
 }
 
 func winningCombinations() [][3]int {
@@ -17,7 +17,7 @@ func (game *Game) IsGameover() bool {
 }
 
 func (game *Game) HasWinner() bool {
-	board := game.board
+	board := game.board.(*TictactoeBoard)
 	for _, combination := range winningCombinations() {
 		if board[combination[0]] == E {
 			continue
