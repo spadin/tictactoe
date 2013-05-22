@@ -9,6 +9,11 @@ type Prompter struct {
 	out *Printer
 }
 
+func NewPrompter() (prompter *Prompter) {
+	prompter = &Prompter{in: NewStdinGetter(), out: NewStdoutPrinter()}
+	return
+}
+
 func (p *Prompter) PromptInt(message string) (input int) {
 	p.out.Print(message)
 	input = p.in.GetIntWithCallback(func() {
@@ -18,7 +23,7 @@ func (p *Prompter) PromptInt(message string) (input int) {
 	return
 }
 
-func (p *Prompter) PromptChoice(message string, choices ...string) (selection string) {
+func (p *Prompter) PromptChoiceList(message string, choices ...string) (selection string) {
 	p.out.Println(message)
 	for index, choice := range choices {
 		choiceStr := "" + strconv.Itoa(index+1) + ". " + choice
@@ -34,10 +39,5 @@ func (p *Prompter) PromptChoice(message string, choices ...string) (selection st
 
 	}
 	selection = choices[selectionIdx]
-	return
-}
-
-func NewPrompter() (prompter *Prompter) {
-	prompter = &Prompter{in: NewStdinGetter(), out: NewStdoutPrinter()}
 	return
 }

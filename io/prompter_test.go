@@ -61,12 +61,12 @@ func (t *testPrompterSuite) TestNewPrompter() {
 
 }
 
-func (t *testPrompterSuite) TestPromptChoice() {
+func (t *testPrompterSuite) TestPromptChoiceList() {
 	var choice string
 	output := iohelpers.CaptureOutput(func() {
 		iohelpers.SimulateInput("1", func() {
 			prompter := prompterSuiteSetup()
-			choice = prompter.PromptChoice("Choose from the following", "banana", "apple")
+			choice = prompter.PromptChoiceList("Choose from the following", "banana", "apple")
 		})
 	})
 
@@ -79,12 +79,12 @@ func (t *testPrompterSuite) TestPromptChoice() {
 	t.Equal("banana", choice, "should choose choice 1 and return choice string")
 }
 
-func (t *testPrompterSuite) TestPromptChoiceWithInvalidInputs() {
+func (t *testPrompterSuite) TestPromptChoiceListWithInvalidInputs() {
 	var choice string
 	output := iohelpers.CaptureOutput(func() {
 		iohelpers.SimulateMultipleInput([]string{"5", "1"}, func() {
 			prompter := prompterSuiteSetup()
-			choice = prompter.PromptChoice("Choose from the following", "banana", "apple")
+			choice = prompter.PromptChoiceList("Choose from the following", "banana", "apple")
 		})
 	})
 
