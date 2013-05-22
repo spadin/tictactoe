@@ -6,24 +6,24 @@ import (
 	"testing"
 )
 
-type testGetterSuite struct {
+type testStdinGetterSuite struct {
 	prettytest.Suite
 }
 
-func getterSuiteSetup() (getter *Getter) {
+func getterSuiteSetup() (getter *StdinGetter) {
 	getter = NewStdinGetter()
 	return
 }
 
-func TestGetterRunner(t *testing.T) {
+func TestStdinGetterRunner(t *testing.T) {
 	prettytest.RunWithFormatter(
 		t,
 		new(prettytest.TDDFormatter),
-		new(testGetterSuite),
+		new(testStdinGetterSuite),
 	)
 }
 
-func (t *testGetterSuite) TestFscanln() {
+func (t *testStdinGetterSuite) TestFscanln() {
 	var input string
 	simulateInput("sample-input", func() {
 		getter := getterSuiteSetup()
@@ -33,19 +33,12 @@ func (t *testGetterSuite) TestFscanln() {
 	t.Equal("sample-input", input)
 }
 
-func (t *testGetterSuite) TestNewGetter() {
-	_, reader, _ := os.Pipe()
-	getter := NewGetter(reader)
-
-	t.Equal(reader, getter.in)
-}
-
-func (t *testGetterSuite) TestNewStdinGetter() {
+func (t *testStdinGetterSuite) TestNewStdinGetter() {
 	getter := NewStdinGetter()
 	t.Equal(os.Stdin, getter.in)
 }
 
-func (t *testGetterSuite) TestGetString() {
+func (t *testStdinGetterSuite) TestGetString() {
 	var input string
 	simulateInput("sample-string", func() {
 		getter := getterSuiteSetup()
@@ -55,7 +48,7 @@ func (t *testGetterSuite) TestGetString() {
 	t.Equal("sample-string", input)
 }
 
-func (t *testGetterSuite) TestGetInt() {
+func (t *testStdinGetterSuite) TestGetInt() {
 	var input int
 	simulateInput("1", func() {
 		getter := getterSuiteSetup()
@@ -65,7 +58,7 @@ func (t *testGetterSuite) TestGetInt() {
 	t.Equal(1, input)
 }
 
-func (t *testGetterSuite) TestRepeatedlyAskForInt() {
+func (t *testStdinGetterSuite) TestRepeatedlyAskForInt() {
 	var input int
 	simulateMultipleInput([]string{"A", "C", "8"}, func() {
 		getter := getterSuiteSetup()
@@ -74,7 +67,7 @@ func (t *testGetterSuite) TestRepeatedlyAskForInt() {
 	t.Equal(8, input)
 }
 
-func (t *testGetterSuite) TestGetIntWithCallback() {
+func (t *testStdinGetterSuite) TestGetIntWithCallback() {
 	var count int
 	simulateMultipleInput([]string{"A", "C", "8"}, func() {
 		getter := getterSuiteSetup()

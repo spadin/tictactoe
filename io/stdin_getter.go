@@ -7,38 +7,33 @@ import (
 	"strconv"
 )
 
-type Getter struct {
+type StdinGetter struct {
 	in io.Reader
 }
 
-func NewGetter(in io.Reader) (getter *Getter) {
-	getter = &Getter{in: in}
+func NewStdinGetter() (getter *StdinGetter) {
+	getter = &StdinGetter{in: os.Stdin}
 	return
 }
 
-func NewStdinGetter() (getter *Getter) {
-	getter = NewGetter(os.Stdin)
-	return
-}
-
-func (g *Getter) Fscanln() (input string) {
+func (g *StdinGetter) Fscanln() (input string) {
 	fmt.Fscanln(g.in, &input)
 	return
 }
 
-func (g *Getter) GetString() (input string) {
+func (g *StdinGetter) GetString() (input string) {
 	input = g.Fscanln()
 	return
 }
 
-func (g *Getter) GetInt() (input int) {
+func (g *StdinGetter) GetInt() (input int) {
 	input = g.GetIntWithCallback(func() {})
 	return
 }
 
 type errCallback func()
 
-func (g *Getter) GetIntWithCallback(cb errCallback) (input int) {
+func (g *StdinGetter) GetIntWithCallback(cb errCallback) (input int) {
 	str := g.GetString()
 	i64, err := strconv.ParseInt(str, 10, 0)
 	if err != nil {
