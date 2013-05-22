@@ -4,6 +4,11 @@ type TictactoeGame struct {
 	board Board
 }
 
+func NewTictactoeGame() (game *TictactoeGame) {
+	game = new(TictactoeGame)
+	return
+}
+
 func winningCombinations() [][3]int {
 	return [][3]int{
 		[3]int{0, 1, 2}, [3]int{4, 5, 6}, [3]int{7, 8, 9},

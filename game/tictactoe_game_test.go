@@ -11,7 +11,7 @@ type testTictactoeGameSuite struct {
 
 func gameSuiteSetup() (board Board, game *TictactoeGame) {
 	board = NewTictactoeBoard()
-	game = new(TictactoeGame)
+	game = NewTictactoeGame()
 	game.board = board
 	return
 }
