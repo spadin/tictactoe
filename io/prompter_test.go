@@ -98,3 +98,35 @@ func (t *testPrompterSuite) TestPromptChoiceListWithInvalidInputs() {
 	t.Equal(expectedOutput, output)
 	t.Equal("banana", choice, "should choose choice 1 and return choice string")
 }
+
+func (t *testPrompterSuite) TestPromptIntChoice() {
+	var choice int
+	output := iohelpers.CaptureOutput(func() {
+		iohelpers.SimulateInput("6", func() {
+			prompter := prompterSuiteSetup()
+			choice = prompter.PromptIntChoice("Choose from the following", 1, 2, 5, 6)
+		})
+	})
+
+	expectedOutput := "Choose from the following: (1, 2, 5, 6)"
+
+	t.Equal(expectedOutput, output)
+	t.Equal(6, choice, "should choose 6")
+}
+
+func (t *testPrompterSuite) TestPromptIntChoiceWithInvalidInput() {
+	var choice int
+	output := iohelpers.CaptureOutput(func() {
+		iohelpers.SimulateMultipleInput([]string{"8", "3", "5"}, func() {
+			prompter := prompterSuiteSetup()
+			choice = prompter.PromptIntChoice("Choose from the following", 1, 2, 5, 6)
+		})
+	})
+
+	expectedOutput := "Choose from the following: (1, 2, 5, 6)\n" +
+		"Invalid input, please choose one of the numbers listed above\n" +
+		"Invalid input, please choose one of the numbers listed above"
+
+	t.Equal(expectedOutput, output)
+	t.Equal(5, choice, "should choose 5")
+}

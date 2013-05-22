@@ -2,6 +2,7 @@ package io
 
 import (
 	"strconv"
+	"strings"
 )
 
 type Prompter struct {
@@ -39,5 +40,35 @@ func (p *Prompter) PromptChoiceList(message string, choices ...string) (selectio
 
 	}
 	selection = choices[selectionIdx]
+	return
+}
+
+func validSelection(selection int, choices []int) (validSelection bool) {
+	validSelection = false
+	for _, choice := range choices {
+		if selection == choice {
+			validSelection = true
+		}
+	}
+	return
+}
+
+func intArrayToStringArray(intArr []int) (strArr []string) {
+	for _, item := range intArr {
+		strArr = append(strArr, strconv.Itoa(item))
+	}
+	return
+}
+
+func (p *Prompter) PromptIntChoice(message string, choices ...int) (selection int) {
+	stringChoices := intArrayToStringArray(choices)
+
+	promptMessage := message + ": (" + strings.Join(stringChoices, ", ") + ")"
+	selection = p.PromptInt(promptMessage)
+
+	for !validSelection(selection, choices) {
+		selection = p.PromptInt("\nInvalid input, please choose one of the numbers listed above")
+	}
+
 	return
 }
