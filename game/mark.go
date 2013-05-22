@@ -2,9 +2,7 @@ package game
 
 type Mark int
 
-const E Mark = Mark(0)
-const X Mark = Mark(1)
-const O Mark = Mark(2)
+const E, X, O = Mark(0), Mark(1), Mark(2)
 
 func stringify(mark Mark) (str string) {
 	switch mark {
