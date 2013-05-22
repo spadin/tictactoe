@@ -1,4 +1,4 @@
-package tictactoe
+package game
 
 type Board [9]Mark
 

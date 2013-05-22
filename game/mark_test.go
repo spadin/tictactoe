@@ -1,4 +1,4 @@
-package tictactoe
+package game
 
 import (
 	"github.com/remogatto/prettytest"
