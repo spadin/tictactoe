@@ -2,7 +2,6 @@ package io
 
 import (
 	"github.com/remogatto/prettytest"
-	"os"
 	"testing"
 )
 
@@ -56,8 +55,10 @@ func (t *testStdPrompterSuite) TestPromptIntRepeatedly() {
 func (t *testStdPrompterSuite) TestNewStdPrompter() {
 	stdPrompter := NewStdPrompter()
 	_, getterErr := stdPrompter.in.(*StdinGetter)
-	t.Nil(getterErr, "sets StdinGetter to in")
-	t.Equal(os.Stdout, stdPrompter.out.out, "sets Stdout to printer")
+	t.Nil(getterErr, "sets in to StdinGetter")
+
+	_, printerErr := stdPrompter.out.(*StdoutPrinter)
+	t.Nil(printerErr, "sets out to StdoutPrinter")
 }
 
 func (t *testStdPrompterSuite) TestPromptChoiceList() {
