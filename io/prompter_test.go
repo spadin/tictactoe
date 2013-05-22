@@ -46,7 +46,11 @@ func (t *testPrompterSuite) TestPromptIntRepeatedly() {
 		})
 	})
 
-	t.Equal("Enter a number:\nInvalid input, please enter a number\nEnter a number:", output)
+	expectedOutput := "Enter a number:\n" +
+		"Invalid input, please enter a number\n" +
+		"Enter a number:"
+
+	t.Equal(expectedOutput, output)
 	t.Equal(1, input)
 }
 
@@ -66,7 +70,12 @@ func (t *testPrompterSuite) TestPromptChoice() {
 		})
 	})
 
-	t.Equal("Choose from the following\n1. banana\n2. apple\nEnter your choice:", output)
+	expectedOutput := "Choose from the following\n" +
+		"1. banana\n" +
+		"2. apple\n" +
+		"Enter your choice:"
+
+	t.Equal(expectedOutput, output)
 	t.Equal("banana", choice, "should choose choice 1 and return choice string")
 }
 
@@ -79,6 +88,13 @@ func (t *testPrompterSuite) TestPromptChoiceWithInvalidInputs() {
 		})
 	})
 
-	t.Equal("Choose from the following\n1. banana\n2. apple\nEnter your choice:\nInvalid input, please enter a number from the choice list\nEnter your choice:", output)
+	expectedOutput := "Choose from the following\n" +
+		"1. banana\n" +
+		"2. apple\n" +
+		"Enter your choice:\n" +
+		"Invalid input, please enter a number from the choice list\n" +
+		"Enter your choice:"
+
+	t.Equal(expectedOutput, output)
 	t.Equal("banana", choice, "should choose choice 1 and return choice string")
 }

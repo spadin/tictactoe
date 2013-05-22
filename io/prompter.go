@@ -2,7 +2,6 @@ package io
 
 import (
 	"strconv"
-	"strings"
 )
 
 type Prompter struct {
@@ -22,7 +21,7 @@ func (p *Prompter) PromptInt(message string) (input int) {
 func (p *Prompter) PromptChoice(message string, choices ...string) (selection string) {
 	p.out.Println(message)
 	for index, choice := range choices {
-		choiceStr := strings.Join([]string{strconv.Itoa(index + 1), ". ", choice}, "")
+		choiceStr := "" + strconv.Itoa(index+1) + ". " + choice
 		p.out.Println(choiceStr)
 	}
 
