@@ -1,6 +1,7 @@
 package game
 
 import (
+	"fmt"
 	"github.com/remogatto/prettytest"
 	"testing"
 )
@@ -47,4 +48,16 @@ func (t *testTictactoeBoardSuite) TestTictactoeBoardIsFull() {
 func (t *testTictactoeBoardSuite) TestTictactoeBoardIsNotFull() {
 	board := tictactoeBoardSuiteSetup()
 	t.False(board.IsFull(), "determines tictactoeBoard is not full")
+}
+
+func (t *testTictactoeBoardSuite) TestTictactoeBoardOpenPositions() {
+	board := tictactoeBoardSuiteSetup()
+	makeMoves(board, 0, 1, 2)
+
+	expected, actual := []int{3, 4, 5, 6, 7, 8}, board.OpenPositions()
+
+	strExpected := fmt.Sprintf("%v", expected)
+	strActual := fmt.Sprintf("%v", actual)
+
+	t.Equal(strExpected, strActual, "returns open positions")
 }

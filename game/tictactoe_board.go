@@ -20,6 +20,15 @@ func (board TictactoeBoard) IsFull() bool {
 	return true
 }
 
+func (board TictactoeBoard) OpenPositions() (positions []int) {
+	for index, val := range board {
+		if val == E {
+			positions = append(positions, index)
+		}
+	}
+	return
+}
+
 func (board *TictactoeBoard) SetMark(mark Mark, index int) {
 	board[index] = mark
 }
