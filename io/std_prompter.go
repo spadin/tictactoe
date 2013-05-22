@@ -7,7 +7,7 @@ import (
 
 type StdPrompter struct {
 	in  Getter
-	out *Printer
+	out *StdoutPrinter
 }
 
 func NewStdPrompter() (prompter *StdPrompter) {

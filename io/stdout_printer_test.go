@@ -6,24 +6,24 @@ import (
 	"testing"
 )
 
-type testPrinterSuite struct {
+type testStdoutPrinterSuite struct {
 	prettytest.Suite
 }
 
-func printerSuiteSetup() (printer *Printer) {
+func printerSuiteSetup() (printer *StdoutPrinter) {
 	printer = NewStdoutPrinter()
 	return
 }
 
-func TestPrinterRunner(t *testing.T) {
+func TestStdoutPrinterRunner(t *testing.T) {
 	prettytest.RunWithFormatter(
 		t,
 		new(prettytest.TDDFormatter),
-		new(testPrinterSuite),
+		new(testStdoutPrinterSuite),
 	)
 }
 
-func (t *testPrinterSuite) TestPrint() {
+func (t *testStdoutPrinterSuite) TestPrint() {
 	out := captureOutput(func() {
 		printer := printerSuiteSetup()
 		printer.Print("hello world")
@@ -32,7 +32,7 @@ func (t *testPrinterSuite) TestPrint() {
 	t.Equal("hello world", out)
 }
 
-func (t *testPrinterSuite) TestPrintln() {
+func (t *testStdoutPrinterSuite) TestPrintln() {
 	out := captureOutput(func() {
 		printer := printerSuiteSetup()
 		printer.Println("hello world")
@@ -41,7 +41,7 @@ func (t *testPrinterSuite) TestPrintln() {
 	t.Equal("hello world\n", out)
 }
 
-func (t *testPrinterSuite) TestPrintf() {
+func (t *testStdoutPrinterSuite) TestPrintf() {
 	out := captureOutput(func() {
 		printer := printerSuiteSetup()
 		printer.Printf("The sky is %s", "blue")
@@ -50,13 +50,7 @@ func (t *testPrinterSuite) TestPrintf() {
 	t.Equal("The sky is blue", out)
 }
 
-func (t *testPrinterSuite) TestNewPrinter() {
-	_, writer, _ := os.Pipe()
-	printer := NewPrinter(writer)
-	t.Equal(writer, printer.out, "Print output set to custom writer")
-}
-
-func (t *testPrinterSuite) TestNewStdoutPrinter() {
+func (t *testStdoutPrinterSuite) TestNewStdoutPrinter() {
 	printer := NewStdoutPrinter()
-	t.Equal(os.Stdout, printer.out, "Print output set to stdout")
+	t.Equal(os.Stdout, printer.out, "Printer output set to stdout")
 }
