@@ -61,3 +61,19 @@ func (t *testTictactoeBoardSuite) TestTictactoeBoardOpenPositions() {
 
 	t.Equal(strExpected, strActual, "returns open positions")
 }
+
+func (t *testTictactoeBoardSuite) TestTictactoeBoardStringRepresentation() {
+	board := tictactoeBoardSuiteSetup()
+
+	vertBars := "     |     |     \n"
+	horzBars := "-----------------\n"
+	expected := "\n" + vertBars +
+		"  0  |  1  |  2  \n" +
+		vertBars + horzBars + vertBars +
+		"  3  |  4  |  5  \n" +
+		vertBars + horzBars + vertBars +
+		"  6  |  7  |  8  \n" +
+		vertBars
+
+	t.Equal(expected, board.String(), "returns an accurate representation of the board")
+}

@@ -1,5 +1,7 @@
 package game
 
+import "fmt"
+
 type TictactoeBoard [9]Mark
 
 func NewTictactoeBoard() (board *TictactoeBoard) {
@@ -31,4 +33,27 @@ func (board TictactoeBoard) OpenPositions() (positions []int) {
 
 func (board *TictactoeBoard) SetMark(mark Mark, index int) {
 	board[index] = mark
+}
+
+func (board *TictactoeBoard) String() (str string) {
+	vertBars := "     |     |     \n"
+	horzBars := "-----------------\n"
+
+	var items []interface{}
+	for index, val := range board {
+		var item interface{} = val
+		if val == E {
+			item = index
+		}
+		items = append(items, item)
+	}
+
+	str = fmt.Sprintf("\n"+vertBars+
+		"  %v  |  %v  |  %v  \n"+
+		vertBars+horzBars+vertBars+
+		"  %v  |  %v  |  %v  \n"+
+		vertBars+horzBars+vertBars+
+		"  %v  |  %v  |  %v  \n"+
+		vertBars, items...)
+	return
 }
