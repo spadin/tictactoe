@@ -30,7 +30,7 @@ func (t *testStdinGetterSuite) TestNewStdinGetter() {
 
 func (t *testStdinGetterSuite) TestGetString() {
 	var input string
-	simulateInput("sample-string", func() {
+	SimulateInput("sample-string", func() {
 		getter := getterSuiteSetup()
 		input = getter.GetString()
 	})
@@ -40,7 +40,7 @@ func (t *testStdinGetterSuite) TestGetString() {
 
 func (t *testStdinGetterSuite) TestGetInt() {
 	var input int
-	simulateInput("1", func() {
+	SimulateInput("1", func() {
 		getter := getterSuiteSetup()
 		input = getter.GetInt()
 	})
@@ -50,7 +50,7 @@ func (t *testStdinGetterSuite) TestGetInt() {
 
 func (t *testStdinGetterSuite) TestRepeatedlyAskForInt() {
 	var input int
-	simulateMultipleInput([]string{"A", "C", "8"}, func() {
+	SimulateMultipleInput([]string{"A", "C", "8"}, func() {
 		getter := getterSuiteSetup()
 		input = getter.GetInt()
 	})
@@ -59,7 +59,7 @@ func (t *testStdinGetterSuite) TestRepeatedlyAskForInt() {
 
 func (t *testStdinGetterSuite) TestGetIntWithCallback() {
 	var count int
-	simulateMultipleInput([]string{"A", "C", "8"}, func() {
+	SimulateMultipleInput([]string{"A", "C", "8"}, func() {
 		getter := getterSuiteSetup()
 		getter.GetIntWithCallback(func() {
 			count += 1
