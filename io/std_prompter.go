@@ -6,7 +6,7 @@ import (
 )
 
 type StdPrompter struct {
-	in  *StdinGetter
+	in  Getter
 	out *Printer
 }
 

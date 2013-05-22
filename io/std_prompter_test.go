@@ -55,9 +55,9 @@ func (t *testStdPrompterSuite) TestPromptIntRepeatedly() {
 
 func (t *testStdPrompterSuite) TestNewStdPrompter() {
 	stdPrompter := NewStdPrompter()
-	t.Equal(os.Stdin, stdPrompter.in.in, "sets Stdin to getter")
+	_, getterErr := stdPrompter.in.(*StdinGetter)
+	t.Nil(getterErr, "sets StdinGetter to in")
 	t.Equal(os.Stdout, stdPrompter.out.out, "sets Stdout to printer")
-
 }
 
 func (t *testStdPrompterSuite) TestPromptChoiceList() {
