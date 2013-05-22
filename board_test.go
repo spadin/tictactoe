@@ -18,7 +18,7 @@ func TestBoardRunner(t *testing.T) {
 }
 
 func boardSuiteSetup() *Board {
-	return new(Board)
+	return NewBoard()
 }
 
 func (t *testBoardSuite) TestEmptyBoardIndexForNewBoard() {

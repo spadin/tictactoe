@@ -2,6 +2,11 @@ package tictactoe
 
 type Board [9]Mark
 
+func NewBoard() (board *Board) {
+	board = new(Board)
+	return
+}
+
 func (board Board) IsEmpty(index int) bool {
 	return board[index] == 0
 }
