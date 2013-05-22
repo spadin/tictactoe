@@ -5,17 +5,17 @@ import (
 	"strings"
 )
 
-type Prompter struct {
+type StdPrompter struct {
 	in  *Getter
 	out *Printer
 }
 
-func NewPrompter() (prompter *Prompter) {
-	prompter = &Prompter{in: NewStdinGetter(), out: NewStdoutPrinter()}
+func NewStdPrompter() (prompter *StdPrompter) {
+	prompter = &StdPrompter{in: NewStdinGetter(), out: NewStdoutPrinter()}
 	return
 }
 
-func (p *Prompter) PromptInt(message string) (input int) {
+func (p *StdPrompter) PromptInt(message string) (input int) {
 	p.out.Print(message)
 	input = p.in.GetIntWithCallback(func() {
 		p.out.Println("\nInvalid input, please enter a number")
@@ -24,7 +24,7 @@ func (p *Prompter) PromptInt(message string) (input int) {
 	return
 }
 
-func (p *Prompter) PromptChoiceList(message string, choices ...string) (selection string) {
+func (p *StdPrompter) PromptChoiceList(message string, choices ...string) (selection string) {
 	p.out.Println(message)
 	for index, choice := range choices {
 		choiceStr := "" + strconv.Itoa(index+1) + ". " + choice
@@ -60,7 +60,7 @@ func intArrayToStringArray(intArr []int) (strArr []string) {
 	return
 }
 
-func (p *Prompter) PromptIntChoice(message string, choices ...int) (selection int) {
+func (p *StdPrompter) PromptIntChoice(message string, choices ...int) (selection int) {
 	stringChoices := intArrayToStringArray(choices)
 
 	promptMessage := message + ": (" + strings.Join(stringChoices, ", ") + ")"

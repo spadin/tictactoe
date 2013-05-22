@@ -7,29 +7,29 @@ import (
 	"testing"
 )
 
-type testPrompterSuite struct {
+type testStdPrompterSuite struct {
 	prettytest.Suite
 }
 
-func prompterSuiteSetup() (prompter *Prompter) {
-	prompter = &Prompter{in: NewStdinGetter(), out: NewStdoutPrinter()}
+func stdPrompterSuiteSetup() (stdPrompter *StdPrompter) {
+	stdPrompter = &StdPrompter{in: NewStdinGetter(), out: NewStdoutPrinter()}
 	return
 }
 
-func TestPrompterRunner(t *testing.T) {
+func TestStdPrompterRunner(t *testing.T) {
 	prettytest.RunWithFormatter(
 		t,
 		new(prettytest.TDDFormatter),
-		new(testPrompterSuite),
+		new(testStdPrompterSuite),
 	)
 }
 
-func (t *testPrompterSuite) TestPromptInt() {
+func (t *testStdPrompterSuite) TestPromptInt() {
 	var input int
 	output := iohelpers.CaptureOutput(func() {
 		iohelpers.SimulateInput("1", func() {
-			prompter := prompterSuiteSetup()
-			input = prompter.PromptInt("Enter a number:")
+			stdPrompter := stdPrompterSuiteSetup()
+			input = stdPrompter.PromptInt("Enter a number:")
 		})
 	})
 
@@ -37,12 +37,12 @@ func (t *testPrompterSuite) TestPromptInt() {
 	t.Equal(1, input)
 }
 
-func (t *testPrompterSuite) TestPromptIntRepeatedly() {
+func (t *testStdPrompterSuite) TestPromptIntRepeatedly() {
 	var input int
 	output := iohelpers.CaptureOutput(func() {
 		iohelpers.SimulateMultipleInput([]string{"A", "1"}, func() {
-			prompter := prompterSuiteSetup()
-			input = prompter.PromptInt("Enter a number:")
+			stdPrompter := stdPrompterSuiteSetup()
+			input = stdPrompter.PromptInt("Enter a number:")
 		})
 	})
 
@@ -54,19 +54,19 @@ func (t *testPrompterSuite) TestPromptIntRepeatedly() {
 	t.Equal(1, input)
 }
 
-func (t *testPrompterSuite) TestNewPrompter() {
-	prompter := NewPrompter()
-	t.Equal(os.Stdin, prompter.in.in, "sets Stdin to getter")
-	t.Equal(os.Stdout, prompter.out.out, "sets Stdout to printer")
+func (t *testStdPrompterSuite) TestNewStdPrompter() {
+	stdPrompter := NewStdPrompter()
+	t.Equal(os.Stdin, stdPrompter.in.in, "sets Stdin to getter")
+	t.Equal(os.Stdout, stdPrompter.out.out, "sets Stdout to printer")
 
 }
 
-func (t *testPrompterSuite) TestPromptChoiceList() {
+func (t *testStdPrompterSuite) TestPromptChoiceList() {
 	var choice string
 	output := iohelpers.CaptureOutput(func() {
 		iohelpers.SimulateInput("1", func() {
-			prompter := prompterSuiteSetup()
-			choice = prompter.PromptChoiceList("Choose from the following", "banana", "apple")
+			stdPrompter := stdPrompterSuiteSetup()
+			choice = stdPrompter.PromptChoiceList("Choose from the following", "banana", "apple")
 		})
 	})
 
@@ -79,12 +79,12 @@ func (t *testPrompterSuite) TestPromptChoiceList() {
 	t.Equal("banana", choice, "should choose choice 1 and return choice string")
 }
 
-func (t *testPrompterSuite) TestPromptChoiceListWithInvalidInputs() {
+func (t *testStdPrompterSuite) TestPromptChoiceListWithInvalidInputs() {
 	var choice string
 	output := iohelpers.CaptureOutput(func() {
 		iohelpers.SimulateMultipleInput([]string{"5", "1"}, func() {
-			prompter := prompterSuiteSetup()
-			choice = prompter.PromptChoiceList("Choose from the following", "banana", "apple")
+			stdPrompter := stdPrompterSuiteSetup()
+			choice = stdPrompter.PromptChoiceList("Choose from the following", "banana", "apple")
 		})
 	})
 
@@ -99,12 +99,12 @@ func (t *testPrompterSuite) TestPromptChoiceListWithInvalidInputs() {
 	t.Equal("banana", choice, "should choose choice 1 and return choice string")
 }
 
-func (t *testPrompterSuite) TestPromptIntChoice() {
+func (t *testStdPrompterSuite) TestPromptIntChoice() {
 	var choice int
 	output := iohelpers.CaptureOutput(func() {
 		iohelpers.SimulateInput("6", func() {
-			prompter := prompterSuiteSetup()
-			choice = prompter.PromptIntChoice("Choose from the following", 1, 2, 5, 6)
+			stdPrompter := stdPrompterSuiteSetup()
+			choice = stdPrompter.PromptIntChoice("Choose from the following", 1, 2, 5, 6)
 		})
 	})
 
@@ -114,12 +114,12 @@ func (t *testPrompterSuite) TestPromptIntChoice() {
 	t.Equal(6, choice, "should choose 6")
 }
 
-func (t *testPrompterSuite) TestPromptIntChoiceWithInvalidInput() {
+func (t *testStdPrompterSuite) TestPromptIntChoiceWithInvalidInput() {
 	var choice int
 	output := iohelpers.CaptureOutput(func() {
 		iohelpers.SimulateMultipleInput([]string{"8", "3", "5"}, func() {
-			prompter := prompterSuiteSetup()
-			choice = prompter.PromptIntChoice("Choose from the following", 1, 2, 5, 6)
+			stdPrompter := stdPrompterSuiteSetup()
+			choice = stdPrompter.PromptIntChoice("Choose from the following", 1, 2, 5, 6)
 		})
 	})
 
