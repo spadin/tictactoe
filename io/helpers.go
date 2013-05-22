@@ -1,4 +1,4 @@
-package iohelpers
+package io
 
 import (
 	"bytes"
@@ -10,7 +10,7 @@ import (
 
 type noInputNoReturnFunc func()
 
-func CaptureOutput(operation noInputNoReturnFunc) string {
+func captureOutput(operation noInputNoReturnFunc) string {
 	reader, writer, _ := os.Pipe()
 	stdout := os.Stdout
 	os.Stdout = writer
@@ -29,11 +29,11 @@ func CaptureOutput(operation noInputNoReturnFunc) string {
 	return buf.String()
 }
 
-func SimulateInput(stubbedInput string, operation noInputNoReturnFunc) {
-	SimulateMultipleInput([]string{stubbedInput}, operation)
+func simulateInput(stubbedInput string, operation noInputNoReturnFunc) {
+	simulateMultipleInput([]string{stubbedInput}, operation)
 }
 
-func SimulateMultipleInput(inputSequence []string, operation noInputNoReturnFunc) {
+func simulateMultipleInput(inputSequence []string, operation noInputNoReturnFunc) {
 	reader, writer, _ := os.Pipe()
 	byt := bytes.TrimSpace([]byte(strings.Join(inputSequence, "\n")))
 	buf := bytes.NewBuffer(byt)

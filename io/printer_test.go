@@ -2,7 +2,6 @@ package io
 
 import (
 	"github.com/remogatto/prettytest"
-	"github.com/spadin/tictactoe/io/helpers"
 	"os"
 	"testing"
 )
@@ -25,7 +24,7 @@ func TestPrinterRunner(t *testing.T) {
 }
 
 func (t *testPrinterSuite) TestPrint() {
-	out := iohelpers.CaptureOutput(func() {
+	out := captureOutput(func() {
 		printer := printerSuiteSetup()
 		printer.Print("hello world")
 	})
@@ -34,7 +33,7 @@ func (t *testPrinterSuite) TestPrint() {
 }
 
 func (t *testPrinterSuite) TestPrintln() {
-	out := iohelpers.CaptureOutput(func() {
+	out := captureOutput(func() {
 		printer := printerSuiteSetup()
 		printer.Println("hello world")
 	})
@@ -43,7 +42,7 @@ func (t *testPrinterSuite) TestPrintln() {
 }
 
 func (t *testPrinterSuite) TestPrintf() {
-	out := iohelpers.CaptureOutput(func() {
+	out := captureOutput(func() {
 		printer := printerSuiteSetup()
 		printer.Printf("The sky is %s", "blue")
 	})

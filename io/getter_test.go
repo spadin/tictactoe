@@ -2,7 +2,6 @@ package io
 
 import (
 	"github.com/remogatto/prettytest"
-	"github.com/spadin/tictactoe/io/helpers"
 	"os"
 	"testing"
 )
@@ -26,7 +25,7 @@ func TestGetterRunner(t *testing.T) {
 
 func (t *testGetterSuite) TestFscanln() {
 	var input string
-	iohelpers.SimulateInput("sample-input", func() {
+	simulateInput("sample-input", func() {
 		getter := getterSuiteSetup()
 		input = getter.Fscanln()
 	})
@@ -48,7 +47,7 @@ func (t *testGetterSuite) TestNewStdinGetter() {
 
 func (t *testGetterSuite) TestGetString() {
 	var input string
-	iohelpers.SimulateInput("sample-string", func() {
+	simulateInput("sample-string", func() {
 		getter := getterSuiteSetup()
 		input = getter.GetString()
 	})
@@ -58,7 +57,7 @@ func (t *testGetterSuite) TestGetString() {
 
 func (t *testGetterSuite) TestGetInt() {
 	var input int
-	iohelpers.SimulateInput("1", func() {
+	simulateInput("1", func() {
 		getter := getterSuiteSetup()
 		input = getter.GetInt()
 	})
@@ -68,7 +67,7 @@ func (t *testGetterSuite) TestGetInt() {
 
 func (t *testGetterSuite) TestRepeatedlyAskForInt() {
 	var input int
-	iohelpers.SimulateMultipleInput([]string{"A", "C", "8"}, func() {
+	simulateMultipleInput([]string{"A", "C", "8"}, func() {
 		getter := getterSuiteSetup()
 		input = getter.GetInt()
 	})
@@ -77,7 +76,7 @@ func (t *testGetterSuite) TestRepeatedlyAskForInt() {
 
 func (t *testGetterSuite) TestGetIntWithCallback() {
 	var count int
-	iohelpers.SimulateMultipleInput([]string{"A", "C", "8"}, func() {
+	simulateMultipleInput([]string{"A", "C", "8"}, func() {
 		getter := getterSuiteSetup()
 		getter.GetIntWithCallback(func() {
 			count += 1

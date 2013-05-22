@@ -2,7 +2,6 @@ package io
 
 import (
 	"github.com/remogatto/prettytest"
-	"github.com/spadin/tictactoe/io/helpers"
 	"os"
 	"testing"
 )
@@ -26,8 +25,8 @@ func TestStdPrompterRunner(t *testing.T) {
 
 func (t *testStdPrompterSuite) TestPromptInt() {
 	var input int
-	output := iohelpers.CaptureOutput(func() {
-		iohelpers.SimulateInput("1", func() {
+	output := captureOutput(func() {
+		simulateInput("1", func() {
 			stdPrompter := stdPrompterSuiteSetup()
 			input = stdPrompter.PromptInt("Enter a number:")
 		})
@@ -39,8 +38,8 @@ func (t *testStdPrompterSuite) TestPromptInt() {
 
 func (t *testStdPrompterSuite) TestPromptIntRepeatedly() {
 	var input int
-	output := iohelpers.CaptureOutput(func() {
-		iohelpers.SimulateMultipleInput([]string{"A", "1"}, func() {
+	output := captureOutput(func() {
+		simulateMultipleInput([]string{"A", "1"}, func() {
 			stdPrompter := stdPrompterSuiteSetup()
 			input = stdPrompter.PromptInt("Enter a number:")
 		})
@@ -63,8 +62,8 @@ func (t *testStdPrompterSuite) TestNewStdPrompter() {
 
 func (t *testStdPrompterSuite) TestPromptChoiceList() {
 	var choice string
-	output := iohelpers.CaptureOutput(func() {
-		iohelpers.SimulateInput("1", func() {
+	output := captureOutput(func() {
+		simulateInput("1", func() {
 			stdPrompter := stdPrompterSuiteSetup()
 			choice = stdPrompter.PromptChoiceList("Choose from the following", "banana", "apple")
 		})
@@ -81,8 +80,8 @@ func (t *testStdPrompterSuite) TestPromptChoiceList() {
 
 func (t *testStdPrompterSuite) TestPromptChoiceListWithInvalidInputs() {
 	var choice string
-	output := iohelpers.CaptureOutput(func() {
-		iohelpers.SimulateMultipleInput([]string{"5", "1"}, func() {
+	output := captureOutput(func() {
+		simulateMultipleInput([]string{"5", "1"}, func() {
 			stdPrompter := stdPrompterSuiteSetup()
 			choice = stdPrompter.PromptChoiceList("Choose from the following", "banana", "apple")
 		})
@@ -101,8 +100,8 @@ func (t *testStdPrompterSuite) TestPromptChoiceListWithInvalidInputs() {
 
 func (t *testStdPrompterSuite) TestPromptIntChoice() {
 	var choice int
-	output := iohelpers.CaptureOutput(func() {
-		iohelpers.SimulateInput("6", func() {
+	output := captureOutput(func() {
+		simulateInput("6", func() {
 			stdPrompter := stdPrompterSuiteSetup()
 			choice = stdPrompter.PromptIntChoice("Choose from the following", 1, 2, 5, 6)
 		})
@@ -116,8 +115,8 @@ func (t *testStdPrompterSuite) TestPromptIntChoice() {
 
 func (t *testStdPrompterSuite) TestPromptIntChoiceWithInvalidInput() {
 	var choice int
-	output := iohelpers.CaptureOutput(func() {
-		iohelpers.SimulateMultipleInput([]string{"8", "3", "5"}, func() {
+	output := captureOutput(func() {
+		simulateMultipleInput([]string{"8", "3", "5"}, func() {
 			stdPrompter := stdPrompterSuiteSetup()
 			choice = stdPrompter.PromptIntChoice("Choose from the following", 1, 2, 5, 6)
 		})
