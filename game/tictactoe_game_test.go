@@ -50,3 +50,15 @@ func (t *testTictactoeGameSuite) TestTictactoeGameoverTrueWithFullBoard() {
 	playTiedGame(board.(*TictactoeBoard))
 	t.True(game.IsGameover(), "TictactoeGame is over when board full")
 }
+
+func (t *testTictactoeGameSuite) TestTictactoeWinnerTiedGame() {
+	board, game := gameSuiteSetup()
+	playTiedGame(board.(*TictactoeBoard))
+	t.Nil(game.Winner(), "Winner is null for tied game")
+}
+
+func (t *testTictactoeGameSuite) TestTictactoeWinnerXWinner() {
+	board, game := gameSuiteSetup()
+	playXWinningGame(board.(*TictactoeBoard))
+	t.Equal(X, game.Winner())
+}

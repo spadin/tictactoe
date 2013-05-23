@@ -22,6 +22,11 @@ func (game *tictactoeGame) IsGameover() bool {
 }
 
 func (game *tictactoeGame) HasWinner() bool {
+	return !(game.Winner() == nil)
+}
+
+func (game *tictactoeGame) Winner() (winner Mark) {
+	winner = nil
 	board := game.board.(*TictactoeBoard)
 	for _, combination := range winningCombinations() {
 		if board[combination[0]] == E {
@@ -29,8 +34,10 @@ func (game *tictactoeGame) HasWinner() bool {
 		}
 		if board[combination[0]] == board[combination[1]] &&
 			board[combination[0]] == board[combination[2]] {
-			return true
+			winner = board[combination[0]]
+			break
 		}
 	}
-	return false
+	return winner
+
 }
