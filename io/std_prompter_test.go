@@ -27,11 +27,11 @@ func (t *testStdPrompterSuite) TestPromptInt() {
 	output := CaptureOutput(func() {
 		SimulateInput("1", func() {
 			stdPrompter := stdPrompterSuiteSetup()
-			input = stdPrompter.PromptInt("Enter a number:")
+			input = stdPrompter.PromptInt("Enter a number")
 		})
 	})
 
-	t.Equal("Enter a number:", output)
+	t.Equal("Enter a number: ", output)
 	t.Equal(1, input)
 }
 
@@ -40,13 +40,13 @@ func (t *testStdPrompterSuite) TestPromptIntRepeatedly() {
 	output := CaptureOutput(func() {
 		SimulateMultipleInput([]string{"A", "1"}, func() {
 			stdPrompter := stdPrompterSuiteSetup()
-			input = stdPrompter.PromptInt("Enter a number:")
+			input = stdPrompter.PromptInt("Enter a number")
 		})
 	})
 
-	expectedOutput := "Enter a number:\n" +
+	expectedOutput := "Enter a number: " +
 		"Invalid input, please enter a number\n" +
-		"Enter a number:"
+		"Enter a number: "
 
 	t.Equal(expectedOutput, output)
 	t.Equal(1, input)
@@ -73,7 +73,7 @@ func (t *testStdPrompterSuite) TestPromptChoiceList() {
 	expectedOutput := "Choose from the following\n" +
 		"1. banana\n" +
 		"2. apple\n" +
-		"Enter your choice:"
+		"Enter your choice: "
 
 	t.Equal(expectedOutput, output)
 	t.Equal("banana", choice, "should choose choice 1 and return choice string")
@@ -91,9 +91,9 @@ func (t *testStdPrompterSuite) TestPromptChoiceListWithInvalidInputs() {
 	expectedOutput := "Choose from the following\n" +
 		"1. banana\n" +
 		"2. apple\n" +
-		"Enter your choice:\n" +
+		"Enter your choice: " +
 		"Invalid input, please enter a number from the choice list\n" +
-		"Enter your choice:"
+		"Enter your choice: "
 
 	t.Equal(expectedOutput, output)
 	t.Equal("banana", choice, "should choose choice 1 and return choice string")
@@ -108,7 +108,7 @@ func (t *testStdPrompterSuite) TestPromptIntChoice() {
 		})
 	})
 
-	expectedOutput := "Choose from the following: (1, 2, 5, 6)"
+	expectedOutput := "Choose from the following (1, 2, 5, 6): "
 
 	t.Equal(expectedOutput, output)
 	t.Equal(6, choice, "should choose 6")
@@ -123,9 +123,11 @@ func (t *testStdPrompterSuite) TestPromptIntChoiceWithInvalidInput() {
 		})
 	})
 
-	expectedOutput := "Choose from the following: (1, 2, 5, 6)\n" +
-		"Invalid input, please choose one of the numbers listed above\n" +
-		"Invalid input, please choose one of the numbers listed above"
+	expectedOutput := "Choose from the following (1, 2, 5, 6): " +
+		"Invalid input, please choose one of the numbers on the list\n" +
+		"Choose from the following (1, 2, 5, 6): " +
+		"Invalid input, please choose one of the numbers on the list\n" +
+		"Choose from the following (1, 2, 5, 6): "
 
 	t.Equal(expectedOutput, output)
 	t.Equal(5, choice, "should choose 5")
