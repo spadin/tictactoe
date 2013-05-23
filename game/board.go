@@ -1,7 +1,7 @@
 package game
 
 type Board interface {
-	IsEmpty(index int) bool
+	IsEmpty(int) bool
 	IsFull() bool
 	OpenPositions() []int
 }
