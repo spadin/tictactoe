@@ -44,10 +44,12 @@ func (players *TictactoePlayers) Make(name string, mark game.Mark, board game.Bo
 	return
 }
 
-func (players *TictactoePlayers) MakeAndAdd(name string, mark game.Mark, board game.Board, prompter io.Prompter) (player Player) {
-	player = players.Make(name, mark, board, prompter)
-	players.Add(player)
-	return
+func (players *TictactoePlayers) MakeAndAdd(XName string, OName string, board game.Board, prompter io.Prompter) {
+	XPlayer := players.Make(XName, game.X, board, prompter)
+	players.Add(XPlayer)
+
+	OPlayer := players.Make(OName, game.O, board, prompter)
+	players.Add(OPlayer)
 }
 
 func (players *TictactoePlayers) AvailablePlayerTypeChoices() (names []string) {

@@ -74,12 +74,9 @@ func (t *testPlayersSuite) TestMake() {
 
 func (t *testPlayersSuite) TestMakeAndAdd() {
 	players := playersSuiteSetup()
-	mark := game.X
 	board := game.NewTictactoeBoard()
 	prompter := io.NewStdPrompter()
 
-	player := players.MakeAndAdd("human", mark, board, prompter)
-	t.Equal(1, len(players.list))
-	_, err := player.(*Human)
-	t.Nil(err, "should creating human player")
+	players.MakeAndAdd("human", "human", board, prompter)
+	t.Equal(2, len(players.list))
 }
