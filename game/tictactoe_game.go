@@ -1,11 +1,11 @@
 package game
 
-type TictactoeGame struct {
+type tictactoeGame struct {
 	board Board
 }
 
-func NewTictactoeGame(board Board) (game *TictactoeGame) {
-	game = &TictactoeGame{board: board}
+func NewTictactoeGame(board Board) (game Game) {
+	game = &tictactoeGame{board: board}
 	return
 }
 
@@ -17,11 +17,11 @@ func winningCombinations() [][3]int {
 	}
 }
 
-func (game *TictactoeGame) IsGameover() bool {
+func (game *tictactoeGame) IsGameover() bool {
 	return game.HasWinner() || game.board.IsFull()
 }
 
-func (game *TictactoeGame) HasWinner() bool {
+func (game *tictactoeGame) HasWinner() bool {
 	board := game.board.(*TictactoeBoard)
 	for _, combination := range winningCombinations() {
 		if board[combination[0]] == E {

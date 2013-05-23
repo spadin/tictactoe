@@ -9,7 +9,7 @@ type testTictactoeGameSuite struct {
 	prettytest.Suite
 }
 
-func gameSuiteSetup() (board Board, game *TictactoeGame) {
+func gameSuiteSetup() (board Board, game Game) {
 	board = NewTictactoeBoard()
 	game = NewTictactoeGame(board)
 	return
