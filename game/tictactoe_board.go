@@ -5,17 +5,17 @@ import "fmt"
 type TictactoeBoard [9]Mark
 
 func NewTictactoeBoard() (board *TictactoeBoard) {
-	board = new(TictactoeBoard)
+	board = &TictactoeBoard{E, E, E, E, E, E, E, E, E}
 	return
 }
 
 func (board TictactoeBoard) IsEmpty(index int) bool {
-	return board[index] == 0
+	return board[index] == E
 }
 
 func (board TictactoeBoard) IsFull() bool {
 	for index := 0; index < len(board); index++ {
-		if board[index] == Mark(0) {
+		if board[index] == E {
 			return false
 		}
 	}

@@ -25,7 +25,7 @@ func TestTictactoeGameRunner(t *testing.T) {
 
 func (t *testTictactoeGameSuite) TestNewTictactoeGameHasNoWinner() {
 	_, game := gameSuiteSetup()
-	t.False(game.HasWinner(), "New game has no winner")
+	t.False(game.HasWinner())
 }
 
 func (t *testTictactoeGameSuite) TestXWinningTictactoeGameHasWinner() {
