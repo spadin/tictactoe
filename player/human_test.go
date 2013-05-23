@@ -16,7 +16,7 @@ type testPlayerSuite struct {
 func playerSuiteSetup() (board game.Board, player Player) {
 	board = game.NewTictactoeBoard()
 	prompter := io.NewStdPrompter()
-	player = &Human{board: board, prompter: prompter}
+	player = &Human{board: board, prompter: prompter, Mark: game.X}
 	return
 }
 
@@ -38,5 +38,4 @@ func (t *testPlayerSuite) TestPlay() {
 	})
 
 	t.Equal(4, choice, "player should have chosen 4")
-	// t.Equal([]tictactoe.Mark{X, E, E, E, E, E, E, E, E}, board)
 }

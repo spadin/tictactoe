@@ -6,6 +6,7 @@ import (
 )
 
 type Human struct {
+	Mark     game.Mark
 	board    game.Board
 	prompter io.Prompter
 }
