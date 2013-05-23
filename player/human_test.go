@@ -16,7 +16,7 @@ type testPlayerSuite struct {
 func playerSuiteSetup() (board game.Board, player Player) {
 	board = game.NewTictactoeBoard()
 	prompter := io.NewStdPrompter()
-	player = &Human{board: board, prompter: prompter, Mark: game.X}
+	player = NewHumanPlayer(game.X, board, prompter)
 	return
 }
 

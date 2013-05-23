@@ -6,9 +6,18 @@ import (
 )
 
 type Human struct {
-	Mark     game.Mark
+	mark     game.Mark
 	board    game.Board
 	prompter io.Prompter
+}
+
+func NewHumanPlayer(mark game.Mark, board game.Board, prompter io.Prompter) (player Player) {
+	player = &Human{mark: mark, board: board, prompter: prompter}
+	return
+}
+
+func (player *Human) Mark() game.Mark {
+	return player.mark
 }
 
 func (player *Human) Play() int {
