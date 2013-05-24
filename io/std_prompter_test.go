@@ -10,7 +10,7 @@ type testStdPrompterSuite struct {
 }
 
 func stdPrompterSuiteSetup() (stdPrompter *StdPrompter) {
-	stdPrompter = &StdPrompter{Getter: NewStdinGetter(), Printer: NewStdoutPrinter()}
+	stdPrompter = &StdPrompter{getter: NewStdinGetter(), printer: NewStdoutPrinter()}
 	return
 }
 
@@ -54,10 +54,10 @@ func (t *testStdPrompterSuite) TestPromptIntRepeatedly() {
 
 func (t *testStdPrompterSuite) TestNewStdPrompter() {
 	stdPrompter := NewStdPrompter()
-	_, getterErr := stdPrompter.Getter.(*StdinGetter)
+	_, getterErr := stdPrompter.getter.(*StdinGetter)
 	t.Nil(getterErr, "sets in to StdinGetter")
 
-	_, printerErr := stdPrompter.Printer.(*StdoutPrinter)
+	_, printerErr := stdPrompter.printer.(*StdoutPrinter)
 	t.Nil(printerErr, "sets out to StdoutPrinter")
 }
 

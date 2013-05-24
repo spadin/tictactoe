@@ -6,36 +6,44 @@ import (
 )
 
 type StdPrompter struct {
-	Getter
-	Printer
+	getter  Getter
+	printer Printer
 }
 
 func NewStdPrompter() (prompter *StdPrompter) {
-	prompter = &StdPrompter{Getter: NewStdinGetter(), Printer: NewStdoutPrinter()}
+	prompter = &StdPrompter{getter: NewStdinGetter(), printer: NewStdoutPrinter()}
 	return
+}
+
+func (p *StdPrompter) Getter() Getter {
+	return p.getter
+}
+
+func (p *StdPrompter) Printer() Printer {
+	return p.printer
 }
 
 func (p *StdPrompter) PromptInt(message string) (input int) {
 	promptMessage := message + ": "
-	p.Print(promptMessage)
-	input = p.GetIntWithCallback(func() {
-		p.Println("Invalid input, please enter a number")
-		p.Print(promptMessage)
+	p.printer.Print(promptMessage)
+	input = p.getter.GetIntWithCallback(func() {
+		p.printer.Println("Invalid input, please enter a number")
+		p.printer.Print(promptMessage)
 	})
 	return
 }
 
 func (p *StdPrompter) PromptChoiceList(message string, choices ...string) (selection string) {
-	p.Println(message)
+	p.printer.Println(message)
 	for index, choice := range choices {
 		choiceStr := "" + strconv.Itoa(index+1) + ". " + choice
-		p.Println(choiceStr)
+		p.printer.Println(choiceStr)
 	}
 
 	selectionInt := p.PromptInt("Enter your choice")
 	selectionIdx := selectionInt - 1
 	for selectionIdx > len(choices) || selectionIdx < 0 {
-		p.Println("Invalid input, please enter a number from the choice list")
+		p.printer.Println("Invalid input, please enter a number from the choice list")
 		selectionInt = p.PromptInt("Enter your choice")
 		selectionIdx = selectionInt - 1
 
