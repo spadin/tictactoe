@@ -25,7 +25,7 @@ func (game *tictactoeGame) HasWinner() bool {
 	return !(game.Winner() == nil)
 }
 
-func (game *tictactoeGame) Winner() (winner Mark) {
+func (game *tictactoeGame) Winner() (winner interface{}) {
 	winner = nil
 	board := game.board.(*TictactoeBoard)
 	for _, combination := range winningCombinations() {
