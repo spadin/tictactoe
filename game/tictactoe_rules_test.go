@@ -30,7 +30,7 @@ func (t *testTictactoeRulesSuite) TestNewTictactoeRulesHasNoWinner() {
 
 func (t *testTictactoeRulesSuite) TestXWinningTictactoeRulesHasWinner() {
 	board, rules := rulesSuiteSetup()
-	playXWinningGame(board.(*TictactoeBoard))
+	PlayXWinningGame(board.(*TictactoeBoard))
 	t.True(rules.HasWinner(), "X winning rules should have winner")
 }
 
@@ -41,24 +41,24 @@ func (t *testTictactoeRulesSuite) TestTictactoeRulesoverFalseWithNewRules() {
 
 func (t *testTictactoeRulesSuite) TestTictactoeRulesoverTrueWithWinningRules() {
 	board, rules := rulesSuiteSetup()
-	playXWinningGame(board.(*TictactoeBoard))
+	PlayXWinningGame(board.(*TictactoeBoard))
 	t.True(rules.IsGameover(), "TictactoeRules is over when there is a winner")
 }
 
 func (t *testTictactoeRulesSuite) TestTictactoeRulesoverTrueWithFullBoard() {
 	board, rules := rulesSuiteSetup()
-	playTiedGame(board.(*TictactoeBoard))
+	PlayTiedGame(board.(*TictactoeBoard))
 	t.True(rules.IsGameover(), "TictactoeRules is over when board full")
 }
 
 func (t *testTictactoeRulesSuite) TestTictactoeWinnerTiedRules() {
 	board, rules := rulesSuiteSetup()
-	playTiedGame(board.(*TictactoeBoard))
+	PlayTiedGame(board.(*TictactoeBoard))
 	t.Nil(rules.Winner(), "Winner is null for tied rules")
 }
 
 func (t *testTictactoeRulesSuite) TestTictactoeWinnerXWinner() {
 	board, rules := rulesSuiteSetup()
-	playXWinningGame(board.(*TictactoeBoard))
+	PlayXWinningGame(board.(*TictactoeBoard))
 	t.Equal(X, rules.Winner())
 }

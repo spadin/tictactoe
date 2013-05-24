@@ -41,7 +41,7 @@ func (t *testTictactoeBoardSuite) TestMarkingTheTictactoeBoard() {
 
 func (t *testTictactoeBoardSuite) TestTictactoeBoardIsFull() {
 	board := tictactoeBoardSuiteSetup()
-	playTiedGame(board)
+	PlayTiedGame(board)
 	t.True(board.IsFull(), "determines the tictactoeBoard is full")
 }
 
@@ -52,7 +52,7 @@ func (t *testTictactoeBoardSuite) TestTictactoeBoardIsNotFull() {
 
 func (t *testTictactoeBoardSuite) TestTictactoeBoardOpenPositions() {
 	board := tictactoeBoardSuiteSetup()
-	makeMoves(board, 0, 1, 2)
+	MakeMoves(board, 0, 1, 2)
 
 	expected, actual := []int{3, 4, 5, 6, 7, 8}, board.OpenPositions()
 
