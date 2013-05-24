@@ -1,6 +1,6 @@
 package game
 
-type Game interface {
+type Rules interface {
 	IsGameover() bool
 	HasWinner() bool
 	Winner() interface{}

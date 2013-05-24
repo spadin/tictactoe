@@ -32,7 +32,7 @@ func (t *testGameHelpersSuite) TestMakeMoves() {
 
 func (t *testGameHelpersSuite) TestPlayXWinningGame() {
 	board := NewTictactoeBoard()
-	game := NewTictactoeGame(board)
+	game := NewTictactoeRules(board)
 	playXWinningGame(board)
 	t.True(game.IsGameover())
 	t.Equal(X, game.Winner())
@@ -40,7 +40,7 @@ func (t *testGameHelpersSuite) TestPlayXWinningGame() {
 
 func (t *testGameHelpersSuite) TestPlayTiedGame() {
 	board := NewTictactoeBoard()
-	game := NewTictactoeGame(board)
+	game := NewTictactoeRules(board)
 	playTiedGame(board)
 	t.True(game.IsGameover())
 	t.Nil(game.Winner())
