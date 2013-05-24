@@ -29,7 +29,7 @@ func (t *testTictactoeBoardSuite) TestEmptyIndexForNewTictactoeBoard() {
 
 func (t *testTictactoeBoardSuite) TestNonEmptyTictactoeBoardIndex() {
 	board := tictactoeBoardSuiteSetup()
-	board[0] = X
+	board.state[0] = X
 	t.False(board.IsEmpty(0), "marked position not empty")
 }
 

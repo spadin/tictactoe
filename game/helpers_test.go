@@ -26,8 +26,8 @@ func (t *testGameHelpersSuite) TestIsEven() {
 func (t *testGameHelpersSuite) TestMakeMoves() {
 	board := NewTictactoeBoard()
 	MakeMoves(board, 0, 1)
-	t.Equal(X, board[0])
-	t.Equal(O, board[1])
+	t.Equal(X, board.state[0])
+	t.Equal(O, board.state[1])
 }
 
 func (t *testGameHelpersSuite) TestPlayXWinningGame() {

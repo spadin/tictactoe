@@ -29,12 +29,12 @@ func (rules *tictactoeRules) Winner() (winner interface{}) {
 	winner = nil
 	board := rules.board.(*TictactoeBoard)
 	for _, combination := range winningCombinations() {
-		if board[combination[0]] == E {
+		if board.state[combination[0]] == E {
 			continue
 		}
-		if board[combination[0]] == board[combination[1]] &&
-			board[combination[0]] == board[combination[2]] {
-			winner = board[combination[0]]
+		if board.state[combination[0]] == board.state[combination[1]] &&
+			board.state[combination[0]] == board.state[combination[2]] {
+			winner = board.state[combination[0]]
 			break
 		}
 	}

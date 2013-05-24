@@ -2,20 +2,22 @@ package game
 
 import "fmt"
 
-type TictactoeBoard [9]Mark
+type TictactoeBoard struct {
+	state [9]Mark
+}
 
 func NewTictactoeBoard() (board *TictactoeBoard) {
-	board = &TictactoeBoard{E, E, E, E, E, E, E, E, E}
+	board = &TictactoeBoard{state: [9]Mark{E, E, E, E, E, E, E, E, E}}
 	return
 }
 
 func (board TictactoeBoard) IsEmpty(index int) bool {
-	return board[index] == E
+	return board.state[index] == E
 }
 
 func (board TictactoeBoard) IsFull() bool {
-	for index := 0; index < len(board); index++ {
-		if board[index] == E {
+	for index := 0; index < len(board.state); index++ {
+		if board.state[index] == E {
 			return false
 		}
 	}
@@ -23,7 +25,7 @@ func (board TictactoeBoard) IsFull() bool {
 }
 
 func (board TictactoeBoard) OpenPositions() (positions []int) {
-	for index, val := range board {
+	for index, val := range board.state {
 		if val == E {
 			positions = append(positions, index)
 		}
@@ -32,7 +34,7 @@ func (board TictactoeBoard) OpenPositions() (positions []int) {
 }
 
 func (board *TictactoeBoard) SetMark(mark Mark, index int) {
-	board[index] = mark
+	board.state[index] = mark
 }
 
 func (board *TictactoeBoard) String() (str string) {
@@ -40,7 +42,7 @@ func (board *TictactoeBoard) String() (str string) {
 	horzBars := "-----------------\n"
 
 	var items []interface{}
-	for index, val := range board {
+	for index, val := range board.state {
 		var item interface{} = val
 		if val == E {
 			item = index
