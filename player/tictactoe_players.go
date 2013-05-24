@@ -22,6 +22,10 @@ func NewTictactoePlayers() (players *TictactoePlayers) {
 	return
 }
 
+func (players *TictactoePlayers) List() []Player {
+	return players.list
+}
+
 func (players *TictactoePlayers) Add(player Player) (err error) {
 	if numPlayers := len(players.list); numPlayers == 2 {
 		return errors.New("Can only have two players")
