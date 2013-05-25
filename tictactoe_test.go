@@ -58,6 +58,7 @@ type MockBoard struct{}
 func (m *MockBoard) IsEmpty(i int) bool {
 	return false
 }
+func (m *MockBoard) Undo() {}
 func (m *MockBoard) IsFull() bool {
 	return false
 }

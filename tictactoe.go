@@ -29,12 +29,6 @@ func (t *Tictactoe) PromptForPlayers() (string, string) {
 	return X, O
 }
 
-func promptForPlayers(prompter io.Prompter, players *player.TictactoePlayers) (string, string) {
-	X := prompter.PromptChoiceList("What is X?", players.AvailablePlayerTypeChoices()...)
-	O := prompter.PromptChoiceList("What is O?", players.AvailablePlayerTypeChoices()...)
-	return X, O
-}
-
 func (t *Tictactoe) PromptAndSetPlayers() {
 	X, O := t.PromptForPlayers()
 	t.players.MakeAndAdd(X, O, t.board, t.prompter)
