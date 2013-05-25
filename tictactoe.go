@@ -81,6 +81,7 @@ func play(prompter io.Prompter) bool {
 	game := NewTictactoe(prompter)
 	game.PromptAndSetPlayers()
 	game.PlayGame()
+	game.PrintGameoverMessage()
 	return game.PromptPlayAgain()
 }
 
