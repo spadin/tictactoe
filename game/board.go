@@ -5,4 +5,5 @@ type Board interface {
 	IsFull() bool
 	OpenPositions() []int
 	SetMark(Mark, int)
+	Undo()
 }

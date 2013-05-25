@@ -3,7 +3,8 @@ package game
 import "fmt"
 
 type TictactoeBoard struct {
-	state [9]Mark
+	state   [9]Mark
+	history []int
 }
 
 func NewTictactoeBoard() (board *TictactoeBoard) {
@@ -34,6 +35,7 @@ func (board TictactoeBoard) OpenPositions() (positions []int) {
 }
 
 func (board *TictactoeBoard) SetMark(mark Mark, index int) {
+	board.history = append(board.history, index)
 	board.state[index] = mark
 }
 
@@ -58,4 +60,11 @@ func (board *TictactoeBoard) String() (str string) {
 		"  %v  |  %v  |  %v  \n"+
 		vertBars, items...)
 	return
+}
+
+func (board *TictactoeBoard) Undo() {
+	h := board.history
+	index := h[len(h)-1]
+	board.history = h[:len(h)-1]
+	board.state[index] = E
 }

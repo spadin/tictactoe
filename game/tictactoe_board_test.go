@@ -77,3 +77,20 @@ func (t *testTictactoeBoardSuite) TestTictactoeBoardStringRepresentation() {
 
 	t.Equal(expected, board.String(), "returns an accurate representation of the board")
 }
+
+func (t *testTictactoeBoardSuite) TestSetMarkAddsToHistory() {
+	board := tictactoeBoardSuiteSetup()
+	board.SetMark(X, 0)
+	board.SetMark(O, 5)
+	t.Equal(5, board.history[1])
+}
+
+func (t *testTictactoeBoardSuite) TestUndo() {
+	board := tictactoeBoardSuiteSetup()
+	board.SetMark(X, 0)
+	board.SetMark(O, 5)
+	t.Equal([9]Mark{X, E, E, E, E, O, E, E, E}, board.state)
+
+	board.Undo()
+	t.Equal([9]Mark{X, E, E, E, E, E, E, E, E}, board.state)
+}
