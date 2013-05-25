@@ -18,6 +18,10 @@ func PlayXWinningGame(board Board) {
 	MakeMoves(board, 0, 4, 1, 5, 2)
 }
 
+func PlayOWinningGame(board Board) {
+	MakeMoves(board, 0, 3, 1, 4, 8, 5)
+}
+
 func PlayTiedGame(board Board) {
 	MakeMoves(board, 0, 1, 2, 4, 3, 5, 7, 6, 8)
 }

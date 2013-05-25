@@ -38,6 +38,14 @@ func (t *testGameHelpersSuite) TestPlayXWinningGame() {
 	t.Equal(X, game.Winner())
 }
 
+func (t *testGameHelpersSuite) TestPlayOWinningGame() {
+	board := NewTictactoeBoard()
+	game := NewTictactoeRules(board)
+	PlayOWinningGame(board)
+	t.True(game.IsGameover())
+	t.Equal(O, game.Winner())
+}
+
 func (t *testGameHelpersSuite) TestPlayTiedGame() {
 	board := NewTictactoeBoard()
 	game := NewTictactoeRules(board)
