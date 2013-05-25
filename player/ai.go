@@ -45,15 +45,16 @@ func (player *Ai) negamax(alpha int, beta int, color int) (score int, position i
 	for _, open := range player.board.OpenPositions() {
 		mark := player.getMark(color)
 		player.board.SetMark(mark, open)
-		score, _ = player.negamax(-beta, -alpha, -color)
-		score = -score
+		val, _ := player.negamax(-beta, -alpha, -color)
+		val = -val
 		player.board.Undo()
 
-		if score >= beta {
-			return score, open
+		if val >= beta {
+			return val, open
 		}
-		if score > alpha {
-			alpha = score
+		if val > alpha {
+			alpha = val
+			score = alpha
 			position = open
 		}
 	}
