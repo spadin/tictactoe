@@ -63,10 +63,9 @@ func (t *Tictactoe) PrintGameoverMessage() {
 }
 
 func (t *Tictactoe) PromptPlayAgain() (playAgain bool) {
-	playAgain = true
 	command := t.prompter.PromptChoiceList("What would you like to do?", "play again", "quit")
-	if command == "quit" {
-		playAgain = false
+	if command == "play again" {
+		playAgain = true
 	}
 	return
 }
