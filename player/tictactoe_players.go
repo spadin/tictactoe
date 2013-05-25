@@ -66,6 +66,7 @@ func (players *TictactoePlayers) AvailablePlayerTypeChoices() (names []string) {
 func (player *TictactoePlayers) availablePlayerTypes() [](*playerType) {
 	return [](*playerType){
 		&playerType{name: "human", constructor: NewHumanPlayer},
+		&playerType{name: "ai", constructor: NewAiPlayer},
 	}
 }
 
