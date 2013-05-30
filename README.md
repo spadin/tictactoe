@@ -14,9 +14,11 @@ run the tests.
 ### Prepare environment
 
 Go requires an environment variable named `$GOPATH` which points to your
-Go workspace. Export `$GOPATH` from your `.zshrc` or analogous file like so:
+Go workspace. You can also export the Go `bin` directory in order to run 
+your executables. Export `$GOPATH` from your `.zshrc` or analogous file like so:
 
     export GOPATH=/Users/sandropadin/Project/go 
+    export PATH=$GOPATH/bin:$PATH # to access Go binaries
 
 You will need to create that `go` directory with the following folder
 structure.
@@ -27,6 +29,19 @@ structure.
     ├── bin
     ├── pkg
     └── src
+
+### Install dependencies
+
+Golang can get dependencies from any repository including: Git, Mercurial and 
+Bazaar repos. One of my Tic Tac Toe dependencies is in a Bazaar repo so you will 
+need to install Bazaar DCVS:
+
+    $ brew install bazaar
+
+Now you can install the rest of the dependencies:
+
+    $ go get launchpad.net/gocheck
+    $ go get github.com/remogatto/prettytest 
 
 ### Get my code
 
@@ -45,6 +60,17 @@ so by switching into each sub-directory and running the following:
 
     $ go test -i # installs dependencies
     $ go test
+
+## Running the game
+
+    $ cd $GOPATH/src/github.com/spadin/tictactoe
+    $ go run tictactoe.go
+
+## Installing the game
+
+    $ cd $GOPATH/src/github.com/spadin/tictactoe
+    $ go install
+    $ tictactoe # assuming $GOPATH/bin is in your $PATH
 
 ## Need more help?
 
