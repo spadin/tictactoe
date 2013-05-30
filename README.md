@@ -33,10 +33,10 @@ structure.
 Now that you have Go installed and the environment set up, you can grab
 my code with the following command:
 
-    $ go get github.com/spadin/tictactoe-go
+    $ go get github.com/spadin/tictactoe
 
 Running this command downloads all of my files from Github to a local directory
-at: `$GOPATH/src/github.com/spadin/tictactoe-go`
+at: `$GOPATH/src/github.com/spadin/tictactoe`
 
 ## Running specs
 
