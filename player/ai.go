@@ -54,11 +54,10 @@ func (player *Ai) negamax(alpha int, beta int, color int) (score int, position i
 		}
 		if val > alpha {
 			alpha = val
-			score = alpha
 			position = open
 		}
 	}
-	return
+	return alpha, position
 }
 
 func (player *Ai) calculateScore() (score int) {
